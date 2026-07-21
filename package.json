@@ -1,6 +1,7 @@
 {
   "name": "@hrcat/monorepo",
   "private": true,
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r dev",
