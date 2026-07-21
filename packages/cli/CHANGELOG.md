@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.8
+
+### Patch Changes
+
+- 6a8dcee: add `@types/node` dependency and type `HeartRateEvent` in scaffold templates
+
 ## 2.0.7
 
 ### Patch Changes
