@@ -1,6 +1,6 @@
 {
   "name": "@hrcat/plugin",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "HeartBeatCat 插件开发工具包 — 开箱即用的插件初始化、主程序通信、设置项管理和类型定义",
   "type": "module",
   "license": "MIT",
