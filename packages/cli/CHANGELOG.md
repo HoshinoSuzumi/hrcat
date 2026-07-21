@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.7
+
+### Patch Changes
+
+- 94fca77: remove streaming dependency from shared composables and update tsconfig/vite config
+
 ## 2.0.6
 
 ### Patch Changes
