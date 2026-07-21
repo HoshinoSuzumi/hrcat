@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.9
+
+### Patch Changes
+
+- 10c8add: add type-safe event handlers and improve Vite config error handling
+
 ## 2.0.8
 
 ### Patch Changes
