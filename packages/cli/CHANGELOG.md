@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.6
+
+### Patch Changes
+
+- 95f4baa: fix
+
 ## 2.0.5
 
 ### Patch Changes
