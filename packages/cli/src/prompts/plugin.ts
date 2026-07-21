@@ -253,8 +253,8 @@ export async function promptPluginConfig(targetDir?: string): Promise<ScaffoldCo
   // ── 目标目录 ──
   const finalTargetDir = targetDir ?? await p.text({
     message: '项目目录：',
-    placeholder: `./${toKebabCase(name)}`,
-    initialValue: `./${toKebabCase(name)}`,
+    placeholder: `./${pluginId}`,
+    initialValue: `./${pluginId}`,
     validate: (v) => v.trim() ? undefined : '目录不能为空',
   }) as string
   if (p.isCancel(finalTargetDir)) { p.cancel('已取消'); return null }
