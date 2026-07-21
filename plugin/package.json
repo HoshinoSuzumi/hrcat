@@ -1,0 +1,52 @@
+{
+  "name": "@hrcat/plugin",
+  "version": "0.1.0",
+  "description": "HeartBeatCat 插件开发工具包 — 开箱即用的插件初始化、主程序通信、设置项管理和类型定义",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Timothy Yin",
+    "email": "master@uniiem.com"
+  },
+  "keywords": [
+    "heartbeatcat",
+    "plugin",
+    "widget",
+    "streaming"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tauri-apps/api": "^2.5.0",
+    "typescript": "^5.7.0",
+    "vue": "^3.5.0"
+  }
+}
