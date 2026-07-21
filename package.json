@@ -4,9 +4,11 @@
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r dev",
-    "clean": "pnpm -r exec rm -rf dist"
+    "clean": "pnpm -r exec rm -rf dist",
+    "create": "node packages/cli/bin/hrcat.mjs"
   },
   "devDependencies": {
+    "@types/node": "^22.20.1",
     "typescript": "^5.7.0"
   }
 }

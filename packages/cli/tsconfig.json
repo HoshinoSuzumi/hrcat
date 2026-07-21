@@ -1,0 +1,16 @@
+{
+  "extends": "../plugin/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "ES2023"
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}
