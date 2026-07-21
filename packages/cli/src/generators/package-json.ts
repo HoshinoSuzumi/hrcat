@@ -20,6 +20,7 @@ export function generatePackageJson(config: ScaffoldConfig, pluginVersion: strin
       },
       devDependencies: {
         '@tauri-apps/api': '^2.5.0',
+        '@types/node': '^22.0.0',
         '@vitejs/plugin-vue': '^5.2.0',
         typescript: '~5.7.0',
         vite: '^6.3.0',
