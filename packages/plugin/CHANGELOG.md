@@ -1,5 +1,11 @@
 # @hrcat/plugin
 
+## 2.0.12
+
+### Patch Changes
+
+- ecd9561: add archiver dependency and implement plugin packaging in Vite config
+
 ## 2.0.11
 
 ### Patch Changes
