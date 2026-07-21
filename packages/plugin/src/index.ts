@@ -1,7 +1,7 @@
 // ── @hrcat/plugin 主入口 ──
 
 // 配置助手
-export { defineConfig } from './define-config'
+export { defineConfig } from './define-config.js'
 
 // 核心工具（框架无关）
 export {
@@ -12,7 +12,7 @@ export {
   subscribeToEvent,
   subscribeToEvents,
   getPluginConfig,
-} from './core'
+} from './core/index.js'
 
 // 类型
 export type {
@@ -41,4 +41,4 @@ export type {
   EventSubscription,
   SSEConnectionStatus,
   EventHandler,
-} from './types'
+} from './types/index.js'

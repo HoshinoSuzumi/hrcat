@@ -1,5 +1,5 @@
-import type { EventHandler, EventPayload, EventSubscription, SystemEventName } from '../types'
-import { isWidget } from './env'
+import type { EventHandler, EventPayload, EventSubscription, SystemEventName } from '../types/index.js'
+import { isWidget } from './env.js'
 
 /**
  * 订阅系统事件（框架无关的核心层）

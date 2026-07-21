@@ -5,7 +5,7 @@ export type {
   PluginManifest,
   LoadedPlugin,
   PluginRuntimeState,
-} from './manifest'
+} from './manifest.js'
 
 export type {
   HeartRateEvent,
@@ -14,14 +14,14 @@ export type {
   SystemEvents,
   SystemEventName,
   EventPayload,
-} from './events'
+} from './events.js'
 
 export type {
   BrcatUserConfig,
   BrcatConfigWidget,
   BrcatConfigStreaming,
   PluginSettingsSchema,
-} from './config'
+} from './config.js'
 
 export type {
   PluginEnv,
@@ -29,4 +29,4 @@ export type {
   EventSubscription,
   SSEConnectionStatus,
   EventHandler,
-} from './runtime'
+} from './runtime.js'

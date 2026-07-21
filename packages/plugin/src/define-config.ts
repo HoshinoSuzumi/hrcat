@@ -1,4 +1,4 @@
-import type { BrcatUserConfig } from './types/config'
+import type { BrcatUserConfig } from './types/config.js'
 
 /**
  * 定义 `brcat.config.ts` 插件配置的辅助函数

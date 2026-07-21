@@ -1,4 +1,4 @@
-import { isWidget } from './env'
+import { isWidget } from './env.js'
 
 /**
  * 读取插件的用户配置（框架无关的核心层）
