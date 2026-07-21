@@ -1,6 +1,6 @@
 export function generateSharedUseHeartRate(): string {
   return `import { ref, onMounted, onUnmounted } from 'vue'
-import { subscribeToEvent, type EventSubscription, type HeartRateEvent } from '@hrcat/plugin'
+import { subscribeToEvent, type EventSubscription } from '@hrcat/plugin'
 
 /**
  * 心率数据 composable
@@ -11,7 +11,7 @@ export function useHeartRate(pluginId: string) {
   let sub: EventSubscription | null = null
 
   onMounted(() => {
-    sub = subscribeToEvent(pluginId, 'heart-rate', (event: HeartRateEvent) => {
+    sub = subscribeToEvent(pluginId, 'heart-rate', (event) => {
       hr.value = event.value
     })
   })

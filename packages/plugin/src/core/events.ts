@@ -1,4 +1,4 @@
-import type { EventHandler, EventSubscription, SystemEventName } from '../types'
+import type { EventHandler, EventPayload, EventSubscription, SystemEventName } from '../types'
 import { isWidget } from './env'
 
 /**
@@ -16,7 +16,7 @@ import { isWidget } from './env'
 export function subscribeToEvent<N extends SystemEventName>(
   pluginId: string,
   eventName: N,
-  handler: EventHandler,
+  handler: EventHandler<EventPayload<N>>,
 ): EventSubscription {
   if (isWidget()) {
     return subscribeViaTauri(eventName, handler)
@@ -27,9 +27,9 @@ export function subscribeToEvent<N extends SystemEventName>(
 /**
  * 通过 Tauri 事件系统订阅（Widget 环境）
  */
-function subscribeViaTauri(
-  eventName: string,
-  handler: EventHandler,
+function subscribeViaTauri<N extends SystemEventName>(
+  eventName: N,
+  handler: EventHandler<EventPayload<N>>,
 ): EventSubscription {
   // dynamic import，避免 streaming 环境因 @tauri-apps/api 不可用而报错
   let cancelled = false
@@ -39,7 +39,7 @@ function subscribeViaTauri(
     .then(({ listen }) => {
       if (cancelled) return
       listen(eventName, (event) => {
-        handler(event.payload)
+        handler(event.payload as EventPayload<N>)
       }).then((fn) => {
         if (!cancelled) {
           unlisten = fn
@@ -63,20 +63,20 @@ function subscribeViaTauri(
 /**
  * 通过 SSE 订阅系统事件（Streaming 环境）
  */
-function subscribeViaSSE(
+function subscribeViaSSE<N extends SystemEventName>(
   pluginId: string,
-  eventName: string,
-  handler: EventHandler,
+  eventName: N,
+  handler: EventHandler<EventPayload<N>>,
 ): EventSubscription {
   const url = `/p/${pluginId}/events`
   const es = new EventSource(url)
 
   es.addEventListener(eventName, (e: MessageEvent) => {
     try {
-      const payload = JSON.parse(e.data)
+      const payload = JSON.parse(e.data) as EventPayload<N>
       handler(payload)
     } catch {
-      handler(e.data)
+      handler(e.data as EventPayload<N>)
     }
   })
 

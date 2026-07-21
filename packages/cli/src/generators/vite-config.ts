@@ -39,7 +39,7 @@ const streamingConfig: UserConfig = {
 }
 
 // ── 选择构建配置 ──
-const mode = import.meta.env.BRCAT_BUILD || ''
+const mode = process.env.BRCAT_BUILD || ''
 const isBuildAll = mode === 'all'
 
 let buildConfigs: UserConfig[] = []
@@ -54,7 +54,7 @@ if (isBuildAll) {
 
 if (buildConfigs.length === 0) {
   logger.error('No build entry found (widget/ or streaming/ directory required)')
-  throw new Error('No build entry found')
+  process.exit(1)
 }
 
 function generateManifest() {
@@ -110,7 +110,7 @@ function generateManifest() {
 export default defineConfig(({ mode }) => {
   if (mode === 'manifest') {
     generateManifest()
-    return {}
+    process.exit(0)
   }
 
   const config = buildConfigs[0]
