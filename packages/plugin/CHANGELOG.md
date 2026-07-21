@@ -1,5 +1,11 @@
 # @hrcat/plugin
 
+## 2.0.14
+
+### Patch Changes
+
+- 9ffb841: rename `brcat` references to `hrcat` across CLI and plugin packages
+
 ## 2.0.13
 
 ## 2.0.12
