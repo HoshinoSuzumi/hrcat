@@ -17,9 +17,9 @@ export type {
 } from './events'
 
 export type {
-  BrcatUserConfig,
-  BrcatConfigWidget,
-  BrcatConfigStreaming,
+  HrcatUserConfig,
+  HrcatConfigWidget,
+  HrcatConfigStreaming,
   PluginSettingsSchema,
 } from './config'
 

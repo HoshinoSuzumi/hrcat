@@ -62,7 +62,7 @@ export function generateTsconfigNodeJson(): string {
         noFallthroughCasesInSwitch: true,
         noUncheckedSideEffectImports: true,
       },
-      include: ['vite.config.ts', 'brcat.config.ts'],
+      include: ['vite.config.ts', 'hrcat.config.ts'],
     },
     null,
     2,

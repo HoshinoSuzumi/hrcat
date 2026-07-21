@@ -4,7 +4,7 @@ export function generateViteConfig(config: ScaffoldConfig): string {
   return `import { createLogger, defineConfig, type UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import pkg from './package.json'
-import brcatCfg from './brcat.config'
+import hrcatCfg from './hrcat.config'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -12,7 +12,7 @@ import archiver from 'archiver'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const logger = createLogger('info', { prefix: 'brcat' })
+const logger = createLogger('info', { prefix: 'hrcat' })
 
 const pluginId = pkg.name
 
@@ -44,35 +44,35 @@ function generateManifest() {
     manifestVersion: 1,
     plugin: {
       id: pluginId,
-      name: brcatCfg.name ?? pkg.name,
+      name: hrcatCfg.name ?? pkg.name,
       version: pkg.version,
       description: pkg.description,
       author: pkg.author ?? null,
-      homepage: brcatCfg.homepage ?? null,
-      icon: brcatCfg.icon ?? 'icon.png',
+      homepage: hrcatCfg.homepage ?? null,
+      icon: hrcatCfg.icon ?? 'icon.png',
     },
-    permissions: brcatCfg.permissions ?? [],
-    settings: brcatCfg.settings ?? null,
+    permissions: hrcatCfg.permissions ?? [],
+    settings: hrcatCfg.settings ?? null,
   }
 
-  if (hasWidget && brcatCfg.widget) {
+  if (hasWidget && hrcatCfg.widget) {
     manifest.widget = {
       entry: 'widget/index.html',
       window: {
-        width: brcatCfg.widget.window?.width ?? 200,
-        height: brcatCfg.widget.window?.height ?? 150,
-        alwaysOnTop: brcatCfg.widget.window?.alwaysOnTop ?? true,
-        transparent: brcatCfg.widget.window?.transparent ?? true,
+        width: hrcatCfg.widget.window?.width ?? 200,
+        height: hrcatCfg.widget.window?.height ?? 150,
+        alwaysOnTop: hrcatCfg.widget.window?.alwaysOnTop ?? true,
+        transparent: hrcatCfg.widget.window?.transparent ?? true,
       },
     }
   }
 
-  if (hasStreaming && brcatCfg.streaming) {
+  if (hasStreaming && hrcatCfg.streaming) {
     manifest.streaming = {
       entry: 'streaming/index.html',
       viewport: {
-        width: brcatCfg.streaming.viewport?.width ?? 1920,
-        height: brcatCfg.streaming.viewport?.height ?? 1080,
+        width: hrcatCfg.streaming.viewport?.width ?? 1920,
+        height: hrcatCfg.streaming.viewport?.height ?? 1080,
       },
     }
   }
@@ -92,22 +92,22 @@ function generateManifest() {
 function packagePlugin() {
   const sourceDir = path.join(__dirname, 'dist', pluginId)
   const output = fs.createWriteStream(
-    path.join(__dirname, 'dist', \`\${pluginId}_\${pkg.version}.brcp\`),
+    path.join(__dirname, 'dist', \`\${pluginId}_\${pkg.version}.hrcp\`),
   )
   const archive = archiver('zip', { zlib: { level: 9 } })
   archive.pipe(output)
   archive.on('error', (err: Error) => { throw err })
   archive.directory(sourceDir, false)
   archive.finalize().then(() => {
-    logger.info(\`Packaged dist/\${pluginId}_\${pkg.version}.brcp\`)
+    logger.info(\`Packaged dist/\${pluginId}_\${pkg.version}.hrcp\`)
   })
 }
 
-function brcatPostBuildPlugin() {
+function hrcatPostBuildPlugin() {
   let secondBuildDone = false
 
   return {
-    name: 'brcat-post-build',
+    name: 'hrcat-post-build',
     async writeBundle() {
       if (hasWidget && hasStreaming && !secondBuildDone) {
         secondBuildDone = true
@@ -130,14 +130,14 @@ function resolveConfig(): UserConfig {
   if (hasWidget) {
     return {
       ...widgetConfig,
-      plugins: [...(widgetConfig.plugins ?? []), brcatPostBuildPlugin()],
+      plugins: [...(widgetConfig.plugins ?? []), hrcatPostBuildPlugin()],
     }
   }
 
   if (hasStreaming) {
     return {
       ...streamingConfig,
-      plugins: [...(streamingConfig.plugins ?? []), brcatPostBuildPlugin()],
+      plugins: [...(streamingConfig.plugins ?? []), hrcatPostBuildPlugin()],
     }
   }
 

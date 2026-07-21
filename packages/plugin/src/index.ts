@@ -31,9 +31,9 @@ export type {
   SystemEventName,
   EventPayload,
   // config
-  BrcatUserConfig,
-  BrcatConfigWidget,
-  BrcatConfigStreaming,
+  HrcatUserConfig,
+  HrcatConfigWidget,
+  HrcatConfigStreaming,
   PluginSettingsSchema,
   // runtime
   PluginEnv,

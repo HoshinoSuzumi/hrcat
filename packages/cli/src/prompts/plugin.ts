@@ -16,7 +16,7 @@ function toKebabCase(str: string): string {
 }
 
 function defaultId(name: string): string {
-  return 'brcat-plugin-' + toKebabCase(name)
+  return 'hrcat-plugin-' + toKebabCase(name)
 }
 
 async function askSettings(): Promise<{ type: 'object'; properties: Record<string, SettingsProperty> } | null> {

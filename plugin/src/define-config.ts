@@ -1,14 +1,14 @@
-import type { BrcatUserConfig } from './types/config'
+import type { HrcatUserConfig } from './types/config'
 
 /**
- * 定义 `brcat.config.ts` 插件配置的辅助函数
+ * 定义 `hrcat.config.ts` 插件配置的辅助函数
  *
  * 提供完整的 TypeScript 类型推导和校验，
  * 替代手写裸对象的配置方式。
  *
  * @example
  * ```ts
- * // brcat.config.ts
+ * // hrcat.config.ts
  * import { defineConfig } from '@hrcat/plugin'
  *
  * export default defineConfig({
@@ -33,6 +33,6 @@ import type { BrcatUserConfig } from './types/config'
  * })
  * ```
  */
-export function defineConfig(config: BrcatUserConfig): BrcatUserConfig {
+export function defineConfig(config: HrcatUserConfig): HrcatUserConfig {
   return config
 }

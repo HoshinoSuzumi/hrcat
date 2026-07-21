@@ -1,6 +1,6 @@
 import type { ScaffoldConfig } from '../types'
 
-export function generateBrcatConfig(config: ScaffoldConfig): string {
+export function generateHrcatConfig(config: ScaffoldConfig): string {
   const lines: string[] = [
     `import { defineConfig } from '@hrcat/plugin'`,
     '',

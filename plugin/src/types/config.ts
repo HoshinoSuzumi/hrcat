@@ -1,7 +1,7 @@
-// ── brcat.config.ts 用户配置类型 ──
+// ── hrcat.config.ts 用户配置类型 ──
 // 用于 defineConfig() 的类型约束
 
-export interface BrcatConfigWidget {
+export interface HrcatConfigWidget {
   window?: {
     width?: number
     height?: number
@@ -10,7 +10,7 @@ export interface BrcatConfigWidget {
   }
 }
 
-export interface BrcatConfigStreaming {
+export interface HrcatConfigStreaming {
   viewport?: {
     width?: number
     height?: number
@@ -32,7 +32,7 @@ export interface PluginSettingsSchema {
   }>
 }
 
-export interface BrcatUserConfig {
+export interface HrcatUserConfig {
   /** 插件显示名称（默认从 package.json 读取） */
   name?: string
   /** 插件主页 */
@@ -40,9 +40,9 @@ export interface BrcatUserConfig {
   /** 图标文件路径（相对于插件根目录） */
   icon?: string
   /** 桌面组件配置（存在即声明 widget 能力） */
-  widget?: BrcatConfigWidget
+  widget?: HrcatConfigWidget
   /** 推流插件配置（存在即声明 streaming 能力） */
-  streaming?: BrcatConfigStreaming
+  streaming?: HrcatConfigStreaming
   /** 事件订阅列表 */
   permissions?: string[]
   /** JSON Schema 描述的插件设置项 */

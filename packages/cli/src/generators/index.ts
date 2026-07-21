@@ -1,5 +1,5 @@
 export { generatePackageJson } from './package-json'
-export { generateBrcatConfig } from './brcat-config'
+export { generateHrcatConfig } from './hrcat-config'
 export { generateViteConfig } from './vite-config'
 export { generateTsconfigJson, generateTsconfigAppJson, generateTsconfigNodeJson } from './tsconfig'
 export {

@@ -9,7 +9,7 @@ import { promptPluginConfig } from '../prompts/plugin'
 import type { ScaffoldConfig } from '../types'
 import {
   generatePackageJson,
-  generateBrcatConfig,
+  generateHrcatConfig,
   generateViteConfig,
   generateTsconfigJson,
   generateTsconfigAppJson,
@@ -52,8 +52,8 @@ function scaffoldProject(config: ScaffoldConfig, pluginVersion: string): string[
   writeFile(root, 'package.json', generatePackageJson(config, pluginVersion))
   files.push('package.json')
 
-  writeFile(root, 'brcat.config.ts', generateBrcatConfig(config))
-  files.push('brcat.config.ts')
+  writeFile(root, 'hrcat.config.ts', generateHrcatConfig(config))
+  files.push('hrcat.config.ts')
 
   writeFile(root, 'vite.config.ts', generateViteConfig(config))
   files.push('vite.config.ts')
@@ -194,7 +194,7 @@ export async function runCreate(targetDir?: string) {
   nextSteps += '\n' + chalk.cyan('pnpm dev')
 
   if (hasWidget && hasStreaming) {
-    nextSteps += '\n' + chalk.dim('# 同时构建两种能力: BRCAT_BUILD=all pnpm dev')
+    nextSteps += '\n' + chalk.dim('# 同时构建两种能力: HRCAT_BUILD=all pnpm dev')
   }
 
   p.note(nextSteps, '下一步')
