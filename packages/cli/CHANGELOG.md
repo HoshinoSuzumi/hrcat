@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.5
+
+### Patch Changes
+
+- 241f683: fix: hardcoded `@hrcat/plugin` version
+
 ## 2.0.4
 
 ### Patch Changes
