@@ -8,6 +8,7 @@ import brcatCfg from './brcat.config'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import archiver from 'archiver'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -36,25 +37,6 @@ const streamingConfig: UserConfig = {
     emptyOutDir: true,
   },
   plugins: [vue()],
-}
-
-// ── 选择构建配置 ──
-const mode = process.env.BRCAT_BUILD || ''
-const isBuildAll = mode === 'all'
-
-let buildConfigs: UserConfig[] = []
-
-if (isBuildAll) {
-  if (hasWidget) buildConfigs.push(widgetConfig)
-  if (hasStreaming) buildConfigs.push(streamingConfig)
-} else {
-  if (hasWidget) buildConfigs.push(widgetConfig)
-  if (hasStreaming) buildConfigs.push(streamingConfig)
-}
-
-if (buildConfigs.length === 0) {
-  logger.error('No build entry found (widget/ or streaming/ directory required)')
-  process.exit(1)
 }
 
 function generateManifest() {
@@ -107,37 +89,63 @@ function generateManifest() {
   logger.info(\`Generated dist/\${pluginId}/hbcat-manifest.json\`)
 }
 
-export default defineConfig(({ mode }) => {
-  if (mode === 'manifest') {
-    generateManifest()
-    process.exit(0)
-  }
+function packagePlugin() {
+  const sourceDir = path.join(__dirname, 'dist', pluginId)
+  const output = fs.createWriteStream(
+    path.join(__dirname, 'dist', \`\${pluginId}_\${pkg.version}.brcp\`),
+  )
+  const archive = archiver('zip', { zlib: { level: 9 } })
+  archive.pipe(output)
+  archive.on('error', (err: Error) => { throw err })
+  archive.directory(sourceDir, false)
+  archive.finalize().then(() => {
+    logger.info(\`Packaged dist/\${pluginId}_\${pkg.version}.brcp\`)
+  })
+}
 
-  const config = buildConfigs[0]
-
-  if (buildConfigs.length > 1) {
-    logger.info(
-      'Multiple build entries detected. Build with BRCAT_BUILD=all to build all, or specify with BRCAT_BUILD=<entry>',
-    )
-  }
+function brcatPostBuildPlugin() {
+  let secondBuildDone = false
 
   return {
-    base: config.base,
-    root: config.root,
-    build: {
-      ...config.build,
-      rollupOptions: config.build?.rollupOptions ?? {},
+    name: 'brcat-post-build',
+    async writeBundle() {
+      if (hasWidget && hasStreaming && !secondBuildDone) {
+        secondBuildDone = true
+        const { build: viteBuild } = await import('vite')
+        logger.info('Building streaming entry...')
+        await viteBuild({
+          ...streamingConfig,
+          configFile: false,
+          logLevel: 'info',
+        } as any)
+      }
+
+      generateManifest()
+      packagePlugin()
     },
-    plugins: [
-      vue(),
-      {
-        name: 'brcat-manifest',
-        closeBundle() {
-          generateManifest()
-        },
-      },
-    ],
   }
-})
+}
+
+function resolveConfig(): UserConfig {
+  if (hasWidget) {
+    return {
+      ...widgetConfig,
+      plugins: [...(widgetConfig.plugins ?? []), brcatPostBuildPlugin()],
+    }
+  }
+
+  if (hasStreaming) {
+    return {
+      ...streamingConfig,
+      plugins: [...(streamingConfig.plugins ?? []), brcatPostBuildPlugin()],
+    }
+  }
+
+  logger.error('No build entry found (widget/ or streaming/ directory required)')
+  process.exit(1)
+}
+
+export default defineConfig(() => resolveConfig())
 `
 }
+

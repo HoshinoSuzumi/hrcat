@@ -48,6 +48,7 @@ export function generateTsconfigNodeJson(): string {
         target: 'ES2022',
         lib: ['ES2023'],
         types: ['node'],
+        esModuleInterop: true,
         module: 'ESNext',
         skipLibCheck: true,
         moduleResolution: 'bundler',
