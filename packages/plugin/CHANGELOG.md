@@ -1,5 +1,11 @@
 # @hrcat/plugin
 
+## 2.0.2
+
+### Patch Changes
+
+- 14e2495: test1
+
 ## 2.0.1
 
 ### Patch Changes
