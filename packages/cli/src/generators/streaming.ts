@@ -31,22 +31,22 @@ createApp(App).mount('#app')
 export function generateStreamingApp(config: ScaffoldConfig): string {
   return `<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { getPluginConfig, subscribeToEvent } from '@hrcat/plugin'
+import { getPluginConfig, subscribeToEvent, type EventSubscription } from '@hrcat/plugin'
 
 const hr = ref(0)
-let unsubscribe: (() => void) | null = null
+let sub: EventSubscription | null = null
 
 onMounted(async () => {
   const cfg = await getPluginConfig('${config.pluginId}')
   console.log('[Streaming] Plugin config:', cfg)
 
-  unsubscribe = subscribeToEvent('${config.pluginId}', 'heart-rate', (event) => {
+  sub = subscribeToEvent('${config.pluginId}', 'heart-rate', (event) => {
     hr.value = event.value
   })
 })
 
 onUnmounted(() => {
-  unsubscribe?.()
+  sub?.unsubscribe()
 })
 </script>
 
