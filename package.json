@@ -7,7 +7,6 @@
     "clean": "pnpm -r exec rm -rf dist",
     "create": "node packages/cli/bin/hrcat.mjs",
     "changeset": "changeset",
-    "version": "changeset version",
     "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
