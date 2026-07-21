@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.11
+
+### Patch Changes
+
+- 03b8d96: fix scaffold
+
 ## 2.0.9
 
 ### Patch Changes
