@@ -7,6 +7,9 @@ import pkg from './package.json'
 import brcatCfg from './brcat.config'
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const logger = createLogger('info', { prefix: 'brcat' })
 
@@ -36,7 +39,7 @@ const streamingConfig: UserConfig = {
 }
 
 // ── 选择构建配置 ──
-const mode = process.env.BRCAT_BUILD || ''
+const mode = import.meta.env.BRCAT_BUILD || ''
 const isBuildAll = mode === 'all'
 
 let buildConfigs: UserConfig[] = []
@@ -51,7 +54,7 @@ if (isBuildAll) {
 
 if (buildConfigs.length === 0) {
   logger.error('No build entry found (widget/ or streaming/ directory required)')
-  process.exit(1)
+  throw new Error('No build entry found')
 }
 
 function generateManifest() {
@@ -107,7 +110,7 @@ function generateManifest() {
 export default defineConfig(({ mode }) => {
   if (mode === 'manifest') {
     generateManifest()
-    process.exit(0)
+    return {}
   }
 
   const config = buildConfigs[0]

@@ -106,7 +106,7 @@ function scaffoldProject(config: ScaffoldConfig, pluginVersion: string): string[
   }
 
   // Shared
-  if (config.widget.enabled && config.streaming.enabled) {
+  if (config.widget.enabled) {
     writeFile(root, 'shared/composables/useHeartRate.ts', generateSharedUseHeartRate())
     files.push('shared/composables/useHeartRate.ts')
   }

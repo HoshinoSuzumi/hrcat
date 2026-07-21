@@ -18,7 +18,6 @@ export function generateTsconfigAppJson(): string {
       compilerOptions: {
         tsBuildInfoFile: './node_modules/.tmp/tsconfig.app.tsbuildinfo',
         target: 'ES2020',
-        useDefineForEsmModules: true,
         module: 'ESNext',
         lib: ['ES2020', 'DOM', 'DOM.Iterable'],
         skipLibCheck: true,
@@ -48,6 +47,7 @@ export function generateTsconfigNodeJson(): string {
         tsBuildInfoFile: './node_modules/.tmp/tsconfig.node.tsbuildinfo',
         target: 'ES2022',
         lib: ['ES2023'],
+        types: ['node'],
         module: 'ESNext',
         skipLibCheck: true,
         moduleResolution: 'bundler',
