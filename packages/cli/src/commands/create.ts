@@ -172,16 +172,16 @@ export async function runCreate(targetDir?: string) {
 
   p.outro(chalk.green('🎉 插件项目创建成功！'))
 
-  let nextSteps = `  ${chalk.cyan(`cd ${path.relative(process.cwd(), config.targetDir)}`)}`
+  let nextSteps = chalk.cyan(`cd ${path.relative(process.cwd(), config.targetDir)}`)
 
   if (!installed) {
-    nextSteps += `\n  ${chalk.cyan('pnpm install')}`
+    nextSteps += '\n' + chalk.cyan('pnpm install')
   }
 
-  nextSteps += `\n  ${chalk.cyan('pnpm dev')}          # 启动开发服务器`
+  nextSteps += '\n' + chalk.cyan('pnpm dev')
 
   if (hasWidget && hasStreaming) {
-    nextSteps += `\n                      # 修改 BRCAT_BUILD 环境变量切换构建目标`
+    nextSteps += '\n' + chalk.dim('# 同时构建两种能力: BRCAT_BUILD=all pnpm dev')
   }
 
   p.note(nextSteps, '下一步')
