@@ -1,5 +1,12 @@
 # @hrcat/cli
 
+## 2.0.12
+
+### Patch Changes
+
+- 834a0f0: use `pluginId` instead of `name` for default project directory
+- ecd9561: add archiver dependency and implement plugin packaging in Vite config
+
 ## 2.0.11
 
 ### Patch Changes
