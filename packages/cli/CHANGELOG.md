@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.1
+
+### Patch Changes
+
+- 397f8b3: test
+
 ## 2.0.0
 
 ### Major Changes
