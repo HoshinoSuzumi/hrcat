@@ -1,6 +1,6 @@
 {
   "name": "@hrcat/plugin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "HeartBeatCat 插件开发工具包 — 开箱即用的插件初始化、主程序通信、设置项管理和类型定义",
   "type": "module",
   "license": "MIT",
@@ -8,7 +8,12 @@
     "name": "Timothy Yin",
     "email": "master@uniiem.com"
   },
-  "keywords": ["heartbeatcat", "plugin", "widget", "streaming"],
+  "keywords": [
+    "heartbeatcat",
+    "plugin",
+    "widget",
+    "streaming"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
