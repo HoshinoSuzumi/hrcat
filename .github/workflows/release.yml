@@ -27,7 +27,18 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Check npm package availability
+        id: npm_publish_access
+        run: |
+          if npm view @hrcat/cli version >/dev/null 2>&1 && npm view @hrcat/plugin version >/dev/null 2>&1; then
+            echo "can_publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::@hrcat packages are not available in npm registry yet. Skipping publish for this run."
+            echo "can_publish=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create Release Pull Request or Publish
+        if: steps.npm_publish_access.outputs.can_publish == 'true'
         uses: changesets/action@v1
         with:
           publish: pnpm release
@@ -37,3 +48,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+      - name: Create Release Pull Request
+        if: steps.npm_publish_access.outputs.can_publish != 'true'
+        uses: changesets/action@v1
+        with:
+          version: pnpm exec changeset version
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
