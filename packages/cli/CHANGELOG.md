@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.13
+
+### Patch Changes
+
+- 24dceb7: use typed EventSubscription and `unsubscribe()` method in streaming template
+
 ## 2.0.12
 
 ### Patch Changes
