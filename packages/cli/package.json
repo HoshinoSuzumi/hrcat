@@ -1,6 +1,6 @@
 {
   "name": "@hrcat/cli",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "HeartBeatCat 插件脚手架 CLI — 交互式创建插件项目",
   "type": "module",
   "license": "MIT",
