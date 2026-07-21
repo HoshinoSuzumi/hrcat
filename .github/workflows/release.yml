@@ -27,13 +27,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Setup npm auth
-        run: |
-          printf "//registry.npmjs.org/:_authToken=%s" "$NPM_TOKEN" > "$HOME/.npmrc"
-          touch .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Create Release Pull Request or Publish
         uses: changesets/action@v1
         with:
@@ -43,4 +36,4 @@ jobs:
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
