@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { execSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import * as p from '@clack/prompts'
 import chalk from 'chalk'
 import ora from 'ora'
@@ -26,18 +27,29 @@ import {
   generateSharedUseHeartRate,
 } from '../generators'
 
+function getPluginVersion(): string {
+  try {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+    const pkgPath = path.resolve(__dirname, '..', '..', 'package.json')
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
+    return pkg.version
+  } catch {
+    return '0.1.0'
+  }
+}
+
 function writeFile(dir: string, filename: string, content: string) {
   const filePath = path.join(dir, filename)
   fs.mkdirSync(path.dirname(filePath), { recursive: true })
   fs.writeFileSync(filePath, content)
 }
 
-function scaffoldProject(config: ScaffoldConfig): string[] {
+function scaffoldProject(config: ScaffoldConfig, pluginVersion: string): string[] {
   const root = config.targetDir
   const files: string[] = []
 
   // Root files
-  writeFile(root, 'package.json', generatePackageJson(config))
+  writeFile(root, 'package.json', generatePackageJson(config, pluginVersion))
   files.push('package.json')
 
   writeFile(root, 'brcat.config.ts', generateBrcatConfig(config))
@@ -153,7 +165,8 @@ export async function runCreate(targetDir?: string) {
 
   // Scaffold
   const spinner = ora('正在生成项目文件...').start()
-  const files = scaffoldProject(config)
+  const pluginVersion = getPluginVersion()
+  const files = scaffoldProject(config, pluginVersion)
   spinner.succeed(`项目已生成到 ${chalk.cyan(config.targetDir)}`)
 
   // Show created files

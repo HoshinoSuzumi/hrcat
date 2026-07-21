@@ -1,6 +1,6 @@
 import type { ScaffoldConfig } from '../types'
 
-export function generatePackageJson(config: ScaffoldConfig): string {
+export function generatePackageJson(config: ScaffoldConfig, pluginVersion: string): string {
   return JSON.stringify(
     {
       name: config.pluginId,
@@ -15,7 +15,7 @@ export function generatePackageJson(config: ScaffoldConfig): string {
         preview: 'vite preview',
       },
       dependencies: {
-        '@hrcat/plugin': '^0.1.0',
+        '@hrcat/plugin': `^${pluginVersion}`,
         vue: '^3.5.0',
       },
       devDependencies: {
