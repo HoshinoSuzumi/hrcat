@@ -1,5 +1,11 @@
 # @hrcat/cli
 
+## 2.0.15
+
+### Patch Changes
+
+- 0536571: add .gitignore generation to scaffold
+
 ## 2.0.14
 
 ### Patch Changes
