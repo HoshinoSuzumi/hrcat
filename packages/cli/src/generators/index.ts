@@ -17,3 +17,4 @@ export {
   generateStreamingViteEnvDts,
 } from './streaming'
 export { generateSharedUseHeartRate } from './shared'
+export { generateGitignore } from './gitignore'

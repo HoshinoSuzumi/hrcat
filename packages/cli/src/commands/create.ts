@@ -25,6 +25,7 @@ import {
   generateStreamingStyleCss,
   generateStreamingViteEnvDts,
   generateSharedUseHeartRate,
+  generateGitignore,
 } from '../generators'
 
 function getPluginVersion(): string {
@@ -66,6 +67,9 @@ function scaffoldProject(config: ScaffoldConfig, pluginVersion: string): string[
 
   writeFile(root, 'tsconfig.node.json', generateTsconfigNodeJson())
   files.push('tsconfig.node.json')
+
+  writeFile(root, '.gitignore', generateGitignore())
+  files.push('.gitignore')
 
   // Widget
   if (config.widget.enabled) {
