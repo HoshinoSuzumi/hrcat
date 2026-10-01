@@ -142,7 +142,7 @@ export async function promptPluginConfig(targetDir?: string): Promise<ScaffoldCo
     initialValue: defaultId(name),
     validate: (v) => {
       if (!v.trim()) return 'ID 不能为空'
-      if (!/^[a-z0-9-]+$/.test(v)) return 'ID 只能包含小写字母、数字和连字符'
+      if (!/^[a-z0-9][a-z0-9_-]*$/.test(v)) return 'ID 须以小写字母或数字开头，其余仅能包含小写字母、数字、连字符和下划线'
     },
   })
   if (p.isCancel(pluginId)) { p.cancel('已取消'); return null }
